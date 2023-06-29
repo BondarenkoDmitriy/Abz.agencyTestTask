@@ -1,0 +1,16 @@
+@mixin onDesktop {
+  @media (min-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin onTablet {
+  @media (min-width: 767px) {
+    @content;
+  }
+}
+
+@mixin fontStyle ($font-size, $line-height) {
+  font-size: $font-size;
+  line-height: $line-height;
+}
