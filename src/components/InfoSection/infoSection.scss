@@ -5,6 +5,8 @@
   margin: auto;
   height: 500px;
 
+  margin-bottom: 60px;
+
   @include onDesktop {
     height: 650px;
   }
@@ -13,9 +15,7 @@
   background-size: cover; 
   background-position: center;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include blocks-center;
 }
 
 .infoSection {

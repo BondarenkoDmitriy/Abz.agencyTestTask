@@ -21,6 +21,12 @@
   align-items: center;
 }
 
+@mixin blocks-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @mixin buttonStyle {
     width: 100px;
     height: 34px;
