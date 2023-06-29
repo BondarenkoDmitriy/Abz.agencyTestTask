@@ -14,3 +14,20 @@
   font-size: $font-size;
   line-height: $line-height;
 }
+
+@mixin top-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin buttonStyle {
+    width: 100px;
+    height: 34px;
+    border-radius: 16px;
+    cursor: pointer;
+  
+    background-color: $primary-color;
+    border: 0;
+}
+

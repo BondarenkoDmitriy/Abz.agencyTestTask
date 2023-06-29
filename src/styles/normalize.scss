@@ -1,3 +1,5 @@
+@import './mixins.scss';
+
 * {
   box-sizing: border-box;
 }
@@ -5,6 +7,9 @@
 body {
   font-family: "Nunito";
   font-weight: 400;
-  font-size: 16px;
-  line-height: 26px;
+  @include fontStyle(16px, 26px);
+}
+
+h1 {
+  @include fontStyle(40px, 40px);
 }
