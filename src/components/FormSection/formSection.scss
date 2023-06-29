@@ -1,0 +1,117 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.container__formSection {
+  padding: 0 20px;
+  margin: auto;
+  gap: 35px;
+
+  @include blocks-center;
+}
+
+.formSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+
+  &__text {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  margin-bottom: 60px;
+
+  @include onTablet {
+    margin: 0 auto;
+  }
+
+  &__field {
+    width: 100%;
+    max-width: 767px;
+
+    @include onTablet {
+      width: 380px
+    }
+
+    height: 54px;
+    border: $border-color;
+    border-radius: 4px;
+  
+    &::placeholder {
+      padding-left: 10px;
+    }
+  
+    &:focus::placeholder {
+      opacity: 0;
+    }
+  
+    &:focus {
+      padding-left: 10px;
+    }
+  
+    &__example {
+      padding-top: 5px;
+      padding-left: 10px;
+      @include fontStyle (12px, 14px);
+      color: #7E7E7E;
+    }
+  }
+
+  &__radio-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &__field {
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  &__file {
+    width: 100%;
+    max-width: 767px;
+
+    @include onTablet {
+      width: 380px
+    }
+
+    height: 54px;
+    border: $border-color;
+    border-radius: 4px;
+  }
+
+  &__ErrorMessage {
+    color: red;
+  }
+}
+
+.radio-button {
+  height: 20px;
+  width: 20px;
+
+  &::before {
+    background-color: $secondary-color;
+  }
+}
+
+.button__form {
+  margin: 0 auto;
+}
+
+.button__valid {
+  background-color: $primary-color;
+  color: $text-color-black;
+}
+
+.button__invalid {
+  background-color: $bg-button-color;
+  color: $text-color-white;
+}
