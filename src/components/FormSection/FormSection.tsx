@@ -5,6 +5,7 @@ import {
   Form,
   Field,
   ErrorMessage,
+  FormikHelpers,
 } from 'formik';
 import * as Yup from 'yup';
 import { FormValues } from '../../types/formTypes';
@@ -28,10 +29,22 @@ export const FormSection: React.FC = () => {
     email: '',
     phone: '',
     position: '',
-    photo: null,
+    photo: null as File | null,
   };
 
-  const handleSubmit = (values: FormValues, { resetForm }: any) => {
+  const handleSubmit = (values: {
+    name: string;
+    email: string;
+    phone: string;
+    position: string;
+    photo: File | null;
+  }, { resetForm }: FormikHelpers<{
+    name: string;
+    email: string;
+    phone: string;
+    position: string;
+    photo: File | null;
+  }>) => {
     // eslint-disable-next-line no-console
     console.log(values);
     resetForm();
@@ -59,18 +72,20 @@ export const FormSection: React.FC = () => {
         >
           <Form className="form">
             <div>
-              <Field
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Your name"
-                className="form__field"
-              />
-              <ErrorMessage
-                name="name"
-                component="div"
-                className="form__ErrorMessage"
-              />
+              <div>
+                <Field
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your name"
+                  className="form__field"
+                />
+                <ErrorMessage
+                  name="name"
+                  component="div"
+                  className="form__ErrorMessage"
+                />
+              </div>
             </div>
             <div>
               <Field
