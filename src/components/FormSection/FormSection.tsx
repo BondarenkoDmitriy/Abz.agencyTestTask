@@ -79,6 +79,7 @@ export const FormSection: React.FC = () => {
                   name="name"
                   placeholder="Your name"
                   className="form__field"
+                  value=""
                 />
                 <ErrorMessage
                   name="name"
@@ -94,6 +95,7 @@ export const FormSection: React.FC = () => {
                 name="email"
                 placeholder="Email"
                 className="form__field"
+                value=""
               />
               <ErrorMessage
                 name="email"
@@ -108,6 +110,7 @@ export const FormSection: React.FC = () => {
                 name="phone"
                 placeholder="Phone"
                 className="form__field"
+                value=""
               />
               <ErrorMessage
                 name="phone"
@@ -174,6 +177,7 @@ export const FormSection: React.FC = () => {
                 id="photo"
                 name="photo"
                 className="form__file"
+                value=""
               />
               <ErrorMessage
                 name="photo"
