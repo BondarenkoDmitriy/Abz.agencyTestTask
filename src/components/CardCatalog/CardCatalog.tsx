@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './cardCatalog.scss';
-// import photoCard from '../../pictures/temp/photoCard.png';
+import Preloader from '../../pictures/Preloader.png';
 import { getNewestCards } from '../../api/cards';
 import { CardData } from '../../types/carddata';
 import { CardDataFromServer } from '../../types/cardDataFromServer';
@@ -8,10 +8,13 @@ import { CardDataFromServer } from '../../types/cardDataFromServer';
 export const CardCatalog: React.FC = () => {
   const [cards, setCards] = useState<CardData[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchCards = async () => {
       try {
+        setLoading(true);
+        await new Promise(resolve => setTimeout(resolve, 5000));
         const newestCards: CardDataFromServer = await getNewestCards(currentPage, 6);
 
         // eslint-disable-next-line no-console
@@ -21,6 +24,8 @@ export const CardCatalog: React.FC = () => {
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error fetching newest cards:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -69,15 +74,21 @@ export const CardCatalog: React.FC = () => {
             );
           })}
         </div>
-        <div className="button__show-more">
-          <button
-            className="button"
-            type="button"
-            onClick={handleShowMore}
-          >
-            Show more
-          </button>
-        </div>
+        {loading ? (
+          <div className="loader">
+            <img className="loader__img" src={Preloader} alt="Loading..." />
+          </div>
+        ) : (
+          <div className="button__show-more">
+            <button
+              className="button"
+              type="button"
+              onClick={handleShowMore}
+            >
+              Show more
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
