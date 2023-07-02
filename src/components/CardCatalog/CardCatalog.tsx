@@ -18,7 +18,7 @@ export const CardCatalog: React.FC = () => {
         const newestCards: CardDataFromServer = await getNewestCards(currentPage, 6);
 
         // eslint-disable-next-line no-console
-        console.log(newestCards.users);
+        // console.log(newestCards.users);
 
         setCards(prevCards => [...prevCards, ...newestCards.users]);
       } catch (error) {

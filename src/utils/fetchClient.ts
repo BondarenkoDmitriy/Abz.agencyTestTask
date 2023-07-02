@@ -2,13 +2,21 @@
 
 import { BASE_URL } from './globalVariables';
 
-type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
+type RequestMethod = 'GET' | 'POST';
 
 function request<T>(
   url: string,
   method: RequestMethod = 'GET',
+  data: any = null,
 ): Promise<T> {
   const options: RequestInit = { method };
+
+  if (data) {
+    options.body = JSON.stringify(data);
+    options.headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+    };
+  }
 
   return fetch(BASE_URL + url, options)
     .then(response => {
@@ -22,4 +30,5 @@ function request<T>(
 
 export const client = {
   get: <T>(url: string) => request<T>(url),
+  post: <T>(url: string, data: any) => request<T>(url, 'POST', data),
 };
