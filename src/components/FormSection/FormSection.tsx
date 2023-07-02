@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import {
@@ -10,6 +11,8 @@ import {
 import * as Yup from 'yup';
 import { FormValues } from '../../types/formTypes';
 import './formSection.scss';
+import { getToken, postSubmitedCard } from '../../api/cards';
+// import { PositionTypes } from '../../types/positionTypes';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string().required('Required'),
@@ -32,22 +35,47 @@ export const FormSection: React.FC = () => {
     photo: null as File | null,
   };
 
-  const handleSubmit = (values: {
-    name: string;
-    email: string;
-    phone: string;
-    position: string;
-    photo: File | null;
-  }, { resetForm }: FormikHelpers<{
-    name: string;
-    email: string;
-    phone: string;
-    position: string;
-    photo: File | null;
-  }>) => {
-    // eslint-disable-next-line no-console
-    console.log(values);
+  const handleSubmit = async (
+    values: FormValues,
+    { resetForm }: FormikHelpers<FormValues>,
+  ) => {
+    const token = await getToken();
+
+    console.log(token);
+    const result = await postSubmitedCard(values);
+
+    console.log(result);
     resetForm();
+    // getPositions()
+    //   .then((positions: PositionTypes[]) => {
+    //     const selectedPosition = positions
+    //       .find((position) => position.name === values.position);
+
+    //     if (selectedPosition) {
+    //       const data = {
+    //         ...values,
+    //         position_id: selectedPosition.id,
+    //       };
+
+    //       postSubmitedCard(data)
+    //         .then((response) => {
+    //           // eslint-disable-next-line no-console
+    //           console.log(response.data);
+    //           resetForm();
+    //         })
+    //         .catch((error) => {
+    //           // eslint-disable-next-line no-console
+    //           console.error(error);
+    //         });
+    //     } else {
+    //       // eslint-disable-next-line no-console
+    //       console.error('Selected position not found');
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     // eslint-disable-next-line no-console
+    //     console.error(error);
+    //   });
   };
 
   const handleValidation = (values: FormValues) => {
@@ -79,7 +107,6 @@ export const FormSection: React.FC = () => {
                   name="name"
                   placeholder="Your name"
                   className="form__field"
-                  value=""
                 />
                 <ErrorMessage
                   name="name"
@@ -95,7 +122,6 @@ export const FormSection: React.FC = () => {
                 name="email"
                 placeholder="Email"
                 className="form__field"
-                value=""
               />
               <ErrorMessage
                 name="email"
@@ -110,7 +136,6 @@ export const FormSection: React.FC = () => {
                 name="phone"
                 placeholder="Phone"
                 className="form__field"
-                value=""
               />
               <ErrorMessage
                 name="phone"

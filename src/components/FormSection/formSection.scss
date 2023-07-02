@@ -43,6 +43,7 @@
     height: 54px;
     border: $border-color;
     border-radius: 4px;
+    padding-left: 10px;
   
     &::placeholder {
       padding-left: 10px;
@@ -50,10 +51,6 @@
   
     &:focus::placeholder {
       opacity: 0;
-    }
-  
-    &:focus {
-      padding-left: 10px;
     }
   
     &__example {
@@ -97,7 +94,7 @@
   height: 20px;
   width: 20px;
 
-  &::before {
+  &:checked {
     background-color: $secondary-color;
   }
 }
@@ -115,3 +112,5 @@
   background-color: $bg-button-color;
   color: $text-color-white;
 }
+
+//------------------------------
