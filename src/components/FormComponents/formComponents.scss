@@ -1,0 +1,29 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.section {
+  @include onTablet {
+    width: 380px;
+    margin: 0 auto;
+  }
+}
+
+.container__formSection {
+  padding: 0 20px;
+  margin: auto;
+  gap: 35px;
+
+  @include blocks-center;
+}
+
+.formSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+
+  &__text {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+}
