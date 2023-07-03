@@ -1,0 +1,45 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.uploadImgInput {
+  &--lable{
+    display: flex;
+    cursor: pointer;
+    margin: 0 auto;
+    
+    width: 100%;
+    max-width: 767px;
+    margin-bottom: 40px;
+  
+    @include onTablet {
+      width: 380px
+    }
+  
+    height: 54px;
+    border: $border-color;
+    border-radius: 4px;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+
+    border-radius: 4px 0 0 4px;
+    border: $br-upload-color;
+  }
+
+  &__field {
+    display: flex;
+    align-items: center;
+    padding-left:20px;
+
+    width: 100%;
+
+    color: $text-color-grey;
+  }
+}
+
+.input {
+  display: none;
+}

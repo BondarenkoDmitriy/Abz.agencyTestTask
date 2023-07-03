@@ -1,0 +1,17 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.button__form {
+  margin: 0 auto;
+  margin-bottom: 60px;
+}
+
+.button__valid {
+  background-color: $primary-color;
+  color: $text-color-black;
+}
+
+.button__invalid {
+  background-color: $bg-button-color;
+  color: $text-color-white;
+}

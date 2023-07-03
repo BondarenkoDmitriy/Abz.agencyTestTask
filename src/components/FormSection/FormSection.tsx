@@ -11,7 +11,7 @@ import {
 import * as Yup from 'yup';
 import { FormValues } from '../../types/formTypes';
 import './formSection.scss';
-import { getToken, postSubmitedCard } from '../../api/cards';
+import { postSubmitedCard } from '../../api/cards';
 // import { PositionTypes } from '../../types/positionTypes';
 
 const SignupSchema = Yup.object().shape({
@@ -31,7 +31,7 @@ export const FormSection: React.FC = () => {
     name: '',
     email: '',
     phone: '',
-    position: '',
+    position_id: 1,
     photo: null as File | null,
   };
 
@@ -39,10 +39,17 @@ export const FormSection: React.FC = () => {
     values: FormValues,
     { resetForm }: FormikHelpers<FormValues>,
   ) => {
-    const token = await getToken();
+    console.log(values);
 
-    console.log(token);
-    const result = await postSubmitedCard(values);
+    const newData: FormValues = {
+      name: values.name,
+      email: values.email,
+      phone: values.phone,
+      photo: values.photo,
+      position_id: 1,
+    };
+
+    const result = await postSubmitedCard(newData);
 
     console.log(result);
     resetForm();
@@ -148,44 +155,72 @@ export const FormSection: React.FC = () => {
               <label>Select your position:</label>
               <div>
                 <label className="form__radio-section__field">
+                  <input
+                    className="radio-button"
+                    type="radio"
+                    id="test1"
+                    name="position"
+                    value="Frontend developer"
+                  />
                   <Field
                     type="radio"
                     name="position"
                     value="Frontend developer"
-                    className="radio-button"
+                    className="radio-button-temp"
                   />
                   <p>Frontend developer</p>
                 </label>
               </div>
               <div>
                 <label className="form__radio-section__field">
+                  <input
+                    className="radio-button"
+                    type="radio"
+                    id="test1"
+                    name="position"
+                    value="Backend developer"
+                  />
                   <Field
                     type="radio"
                     name="position"
                     value="Backend developer"
-                    className="radio-button"
+                    className="radio-button-temp"
                   />
                   Backend developer
                 </label>
               </div>
               <div>
                 <label className="form__radio-section__field">
+                  <input
+                    className="radio-button"
+                    type="radio"
+                    id="test1"
+                    name="position"
+                    value="Designer"
+                  />
                   <Field
                     type="radio"
                     name="position"
                     value="Designer"
-                    className="radio-button"
+                    className="radio-button-temp"
                   />
                   Designer
                 </label>
               </div>
               <div>
                 <label className="form__radio-section__field">
+                  <input
+                    className="radio-button"
+                    type="radio"
+                    id="test1"
+                    name="position"
+                    value="QA"
+                  />
                   <Field
                     type="radio"
                     name="position"
                     value="QA"
-                    className="radio-button"
+                    className="radio-button-temp"
                   />
                   QA
                 </label>
@@ -202,7 +237,7 @@ export const FormSection: React.FC = () => {
                 id="photo"
                 name="photo"
                 className="form__file"
-                value=""
+                // value="Upload"
               />
               <ErrorMessage
                 name="photo"
@@ -219,6 +254,20 @@ export const FormSection: React.FC = () => {
             </button>
           </Form>
         </Formik>
+        <form action="#">
+          <p>
+            <input type="radio" id="test1" name="radio-group" checked />
+            <label htmlFor="test1">Apple</label>
+          </p>
+          <p>
+            <input type="radio" id="test2" name="radio-group" />
+            <label htmlFor="test2">Peach</label>
+          </p>
+          <p>
+            <input type="radio" id="test3" name="radio-group" />
+            <label htmlFor="test3">Orange</label>
+          </p>
+        </form>
       </div>
     </div>
   );

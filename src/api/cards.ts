@@ -11,8 +11,10 @@ export const getToken = () => {
   return client.get<string>('token');
 };
 
-export const postSubmitedCard = (data: FormValues) => {
-  return client.post<CardDataFromServer>('users', data);
+export const postSubmitedCard = async (data: FormValues) => {
+  const token = await getToken();
+
+  return client.post<CardDataFromServer>('users', data, token);
 };
 
 export const getPositions = () => {

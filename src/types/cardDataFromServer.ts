@@ -1,8 +1,9 @@
 import { CardData } from './carddata';
+import { FormValues } from './formTypes';
 import { LinkFromCardData } from './linkFromCardData';
 
 export interface CardDataFromServer {
-  data(data: any): unknown;
+  data(data: FormValues): unknown;
   success: boolean,
   total_pages: number,
   total_users: number,
