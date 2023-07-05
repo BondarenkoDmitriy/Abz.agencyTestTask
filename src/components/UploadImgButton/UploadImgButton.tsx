@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
-import React from 'react';
+import React, { useState } from 'react';
 import './uploadImgButton.scss';
+import cn from 'classnames';
 import { FormValues } from '../../types/formTypes';
 
 interface Props {
@@ -8,6 +9,9 @@ interface Props {
 }
 
 export const UploadImgButton: React.FC<Props> = ({ onInputChange }) => {
+  const [fileName, setFileName] = useState('Upload your photo');
+  const [isFileSelected, setIsFileSelected] = useState(false);
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
 
@@ -38,15 +42,21 @@ export const UploadImgButton: React.FC<Props> = ({ onInputChange }) => {
         }
 
         onInputChange('photo', file); // Updating the value of the photo field in formData
+        setFileName(file.name);
+        setIsFileSelected(true);
       };
     }
   };
+
+  const uploadImgFieldClasses = cn('uploadImgInput__field', {
+    'file-selected': isFileSelected,
+  });
 
   return (
     <>
       <label htmlFor="uploadImgInput" className="uploadImgInput--label">
         <p className="uploadImgInput__button">Upload</p>
-        <p className="uploadImgInput__field">Upload your photo</p>
+        <p className={uploadImgFieldClasses}>{fileName}</p>
         <input
           type="file"
           accept="image/jpeg, image/jpg"

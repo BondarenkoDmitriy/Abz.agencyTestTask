@@ -25,19 +25,28 @@ export const useFormValidation = () => {
   };
 
   const handleInputChange = (fieldName: string, value: string) => {
-    SignupSchema.validateAt(fieldName, { [fieldName]: value })
-      .then(() => {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          [fieldName]: '', // Clearing the error if there was one
-        }));
-      })
-      .catch((validationError) => {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          [fieldName]: validationError.message, // Save the error message
-        }));
-      });
+    if (fieldName === 'phone') {
+      const isPhoneValid = value.startsWith('+380');
+
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [fieldName]: isPhoneValid ? '' : "Phone number must start with '+380'",
+      }));
+    } else {
+      SignupSchema.validateAt(fieldName, { [fieldName]: value })
+        .then(() => {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            [fieldName]: '', // Clearing the error if there was one
+          }));
+        })
+        .catch((validationError) => {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            [fieldName]: validationError.message, // Save the error message
+          }));
+        });
+    }
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

@@ -13,3 +13,12 @@ export interface FormValues {
 //   'size': data?.photo?.size,
 //   'type': data?.photo?.type,
 // }
+
+export interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  position_id: string;
+  photots: File[];
+  // Другие свойства, если есть
+}

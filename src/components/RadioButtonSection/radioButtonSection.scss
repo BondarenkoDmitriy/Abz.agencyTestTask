@@ -22,6 +22,7 @@
   
     &__field {
       position: relative;
+      cursor: pointer;
     }
 
     &__field label {
@@ -45,8 +46,14 @@
       background: #fff;
     }
 
+    transition: background 0.3s;
+
     &__field input[type="radio"]:checked + p:before {
       background: $bg-color;
+
+      &:hover {
+        background: #BAB9B9;
+      }
     }
 
     &__field input[type="radio"]:checked + p:after {
@@ -55,7 +62,7 @@
       height: 12px;
       background: $secondary-color;
       position: absolute;
-      top: 4.5px;
+      top: 5px;
       left: 5px;
       border-radius: 100%;
       transition: all 0.2s ease;
@@ -71,4 +78,26 @@
       transform: scale(1);
     }
   }
+}
+
+[data-title]:hover:after {
+  opacity: 1;
+  transition: all 0.1s ease 0.5s;
+  visibility: visible;
+}
+[data-title]:after {
+  content: attr(data-title);
+  background-color: $text-color-black;
+  color: $text-color-white;
+  position: absolute;
+  padding: 1px 5px 2px 5px;
+  bottom: -1.6em;
+  left: 25%;
+  border-radius: 4px;
+  opacity: 0;
+  z-index: 1;
+  visibility: hidden;
+}
+[data-title] {
+  position: relative;
 }
