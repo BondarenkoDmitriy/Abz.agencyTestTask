@@ -33,6 +33,14 @@
     width: 100%;
     max-width: 767px;
 
+    cursor: pointer;
+
+    transition: border-color 0.3s;
+
+    &:hover {
+      border-color: #BAB9B9;
+    }
+
     &.error {
       border-color: $er-color;
     }

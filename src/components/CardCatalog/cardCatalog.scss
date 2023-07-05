@@ -46,6 +46,24 @@
     background-color: $text-color-white;
     width: 328px;
 
+    cursor: pointer;
+
+    transition: box-shadow 0.5s ease, transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), -5px 5px 10px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.2);
+      // transform: translateY(-5px);
+    }
+
+    &__photo {
+      transition: transform 0.5s ease;
+
+      &:hover {
+        transform: scale(1.25);
+      }
+    }
+
     @include onTablet {
       width: 344px;
     }

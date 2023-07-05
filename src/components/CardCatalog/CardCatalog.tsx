@@ -62,8 +62,8 @@ export const CardCatalog: React.FC = () => {
                 <div>
                   <img className="cardCatalog__card__photo" src={photo} alt="card__photo" />
                 </div>
-                <div className="cardCatalog__card__name">{processedName}</div>
-                <div className="cardCatalog__card__info">
+                <div className="cardCatalog__card__name" data-title={name}>{processedName}</div>
+                <div className="cardCatalog__card__info" data-title={`${processedPosition}\n${processedEmail}\n${phone}`}>
                   {processedPosition}
                   <br />
                   {processedEmail}

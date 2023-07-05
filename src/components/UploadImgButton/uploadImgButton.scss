@@ -10,6 +10,8 @@
     width: 100%;
     max-width: 767px;
     margin-bottom: 40px;
+
+    cursor: pointer;
   
     @include onTablet {
       width: 380px
@@ -37,9 +39,19 @@
     width: 100%;
 
     color: $text-color-grey;
+
+    transition: border-color 0.3s;
+
+    &:hover {
+      border-color: #BAB9B9;
+    }
   }
 }
 
 .input {
   display: none;
+}
+
+.file-selected {
+  color: $text-color-black;
 }

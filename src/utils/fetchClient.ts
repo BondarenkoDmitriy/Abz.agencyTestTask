@@ -13,26 +13,18 @@ function request<T>(
 ): Promise<T> {
   const options: RequestInit = { method };
 
-  //   const formatedFile = {
-  //     'lastModified': data?.photo?.lastModified,
-  //     'lastModifiedDate': data?.photo?.lastModifiedDate,
-  //     'name': data?.photo?.name,
-  //     'size': data?.photo?.size,
-  //     'type': data?.photo?.type,
-  //  };
-  //   }
-
   if (data) {
-    options.body = JSON.stringify(data);
+    // options.body = JSON.stringify(data);
+    const formData = new FormData();
 
-    // eslint-disable-next-line no-console
-    console.log('-----------------------');
-    // eslint-disable-next-line no-console
-    console.log(options.body);
-    options.headers = {
-      'Content-Type': 'application/json',
-      // 'Media type': 'application/json',
-    };
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    // options.headers = {
+    //   'Content-Type': 'application/json',
+    //   'Media type': 'application/json',
+    // };
+    options.body = formData;
   }
 
   if (token) {
@@ -44,13 +36,16 @@ function request<T>(
       // Token: `Bearer ${token}`,
       // 'Media-type': 'application/json',
       Token: token,
+      // Authorization: `Bearer ${token}`,
     };
   }
 
   return fetch(BASE_URL + url, options)
-    .then(response => {
+    .then(async response => {
       if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
+        const errorData = await response.json();
+
+        throw new Error(`Request failed with status ${response.status}: ${errorData.message}`);
       }
 
       return response.json();
