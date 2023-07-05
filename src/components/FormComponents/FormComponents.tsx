@@ -18,14 +18,8 @@ export const FormComponents: React.FC = () => {
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Form submission processing
-    // eslint-disable-next-line no-console
-    console.log(formData);
     try {
-      const data = await postSubmitedCard(formData);
-
-      // eslint-disable-next-line no-console
-      console.log(data);
+      await postSubmitedCard(formData);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
@@ -33,8 +27,6 @@ export const FormComponents: React.FC = () => {
   };
 
   const handleInputChange = (fieldName: keyof FormValues, value: string | number | File | null) => {
-    // eslint-disable-next-line no-console
-    console.log(JSON.stringify(formData));
     setFormData((prevFormData) => ({
       ...prevFormData,
       [fieldName]: value,

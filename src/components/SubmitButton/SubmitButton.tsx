@@ -4,23 +4,19 @@ import { FormValues } from '../../types/formTypes';
 
 interface Props {
   formData: FormValues;
-  // onSubmit: (formData: FormValues) => void;
 }
 
 export const SubmitButton: React.FC<Props> = ({ formData }) => {
-  const isFormValid = Object.values(formData).every(value => value !== ''); // Проверяем, все ли значения в formData заполнены
+  const isFormValid
+    = Object.values(formData).every(value => value !== '')
+    && formData.position_id !== 0;
 
-  // const handleClick = () => {
-  //   onSubmit(formData);
-  // };
-
-  const buttonClassName = `button button__form ${isFormValid ? 'button__valid' : 'button__invalid'}`; // Добавляем класс button__valid или button__invalid в зависимости от заполненности формы
+  const buttonClassName = `button button__form ${isFormValid ? 'button__valid' : 'button__invalid'}`;
 
   return (
     <button
       type="submit"
       className={buttonClassName}
-      // onClick={handleClick}
     >
       Sign up
     </button>
