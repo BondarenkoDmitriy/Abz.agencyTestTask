@@ -1,4 +1,9 @@
-import React, { FormEvent, useState } from 'react';
+import React, {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useState,
+} from 'react';
 import './formComponents.scss';
 import { PersonalInputField } from '../PersonalInputField/PersonalInputField';
 import { RadioButtonSection } from '../RadioButtonSection/RadioButtonSection';
@@ -6,8 +11,13 @@ import { UploadImgButton } from '../UploadImgButton/UploadImgButton';
 import { SubmitButton } from '../SubmitButton/SubmitButton';
 import { FormValues } from '../../types/formTypes';
 import { postSubmitedCard } from '../../api/cards';
+import DefaultPhoto from '../../pictures/Default_Img.jpg';
 
-export const FormComponents: React.FC = () => {
+interface Props {
+  setsuccessRequset: Dispatch<SetStateAction<boolean>>;
+}
+
+export const FormComponents: React.FC<Props> = ({ setsuccessRequset }) => {
   const [formData, setFormData] = useState<FormValues>({
     name: '',
     email: '',
@@ -16,13 +26,26 @@ export const FormComponents: React.FC = () => {
     photo: null,
   });
 
+  const defaultPhoto = new File([DefaultPhoto], 'Default_Img.jpg', { type: 'image/jpeg' });
+
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
+      if (formData.photo === null) {
+        setFormData(data => ({ ...data, photo: defaultPhoto }));
+        await postSubmitedCard(formData);
+
+        return;
+      }
+
+      // eslint-disable-next-line no-console
+      console.log(formData);
       await postSubmitedCard(formData);
+      setsuccessRequset(true);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
+      setsuccessRequset(false);
     }
   };
 

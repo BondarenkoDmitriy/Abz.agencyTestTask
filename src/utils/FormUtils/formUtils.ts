@@ -76,6 +76,10 @@ export const useFormValidation = () => {
       });
   };
 
+  const resetForm = () => {
+    setErrors({});
+  };
+
   return {
     fieldFocused,
     errors,
@@ -83,5 +87,6 @@ export const useFormValidation = () => {
     handleFieldBlur,
     handleInputChange,
     handleSubmit,
+    resetForm,
   };
 };
