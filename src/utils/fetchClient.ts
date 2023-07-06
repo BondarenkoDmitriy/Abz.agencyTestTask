@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { FormValues } from '../types/formTypes';
 import { BASE_URL } from './globalVariables';
 
@@ -14,29 +12,18 @@ function request<T>(
   const options: RequestInit = { method };
 
   if (data) {
-    // options.body = JSON.stringify(data);
     const formData = new FormData();
 
     Object.entries(data).forEach(([key, value]) => {
       formData.append(key, value);
     });
-    // options.headers = {
-    //   'Content-Type': 'application/json',
-    //   'Media type': 'application/json',
-    // };
     options.body = formData;
   }
 
   if (token) {
-    // eslint-disable-next-line no-console
-    console.log('token', token);
-
     options.headers = {
       ...options.headers,
-      // Token: `Bearer ${token}`,
-      // 'Media-type': 'application/json',
       Token: token,
-      // Authorization: `Bearer ${token}`,
     };
   }
 
@@ -51,8 +38,6 @@ function request<T>(
       return response.json();
     })
     .catch(error => {
-      // eslint-disable-next-line no-console
-      console.log('Error:', error);
       throw error;
     });
 }

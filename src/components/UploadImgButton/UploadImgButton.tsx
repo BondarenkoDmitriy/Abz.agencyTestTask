@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import './uploadImgButton.scss';
 import cn from 'classnames';
 import { FormValues } from '../../types/formTypes';
-// import DefaultPhoto from '../../pictures/Default_Img.jpg';
 
 interface Props {
   onInputChange: (fieldName: keyof FormValues, value: File | null) => void;
@@ -12,10 +11,6 @@ interface Props {
 export const UploadImgButton: React.FC<Props> = ({ onInputChange }) => {
   const [fileName, setFileName] = useState('Upload your photo');
   const [isFileSelected, setIsFileSelected] = useState(false);
-  // const defaultPhoto = new File([DefaultPhoto], 'Default_Img.jpg', { type: 'image/jpeg' });
-
-  // eslint-disable-next-line no-console
-  // console.log(defaultPhoto);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];

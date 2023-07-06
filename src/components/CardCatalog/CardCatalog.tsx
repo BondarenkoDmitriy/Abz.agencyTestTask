@@ -17,9 +17,6 @@ export const CardCatalog: React.FC = () => {
         await new Promise(resolve => setTimeout(resolve, 5000));
         const newestCards: CardDataFromServer = await getNewestCards(currentPage, 6);
 
-        // eslint-disable-next-line no-console
-        // console.log(newestCards.users);
-
         setCards(prevCards => [...prevCards, ...newestCards.users]);
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -54,8 +51,6 @@ export const CardCatalog: React.FC = () => {
             const processedPosition = position.length > 20 ? `${position.slice(0, 20)}...` : position;
 
             const processedEmail = email.length > 30 ? `${email.slice(0, 25)}...` : email;
-
-            // const processedPhone = phone.length > 12 ? `${phone.slice(0, 12)}...` : phone;
 
             return (
               <div className="cardCatalog__card" key={id}>
