@@ -38,13 +38,9 @@ export const FormComponents: React.FC<Props> = ({ setsuccessRequset }) => {
         return;
       }
 
-      // eslint-disable-next-line no-console
-      console.log(formData);
       await postSubmitedCard(formData);
       setsuccessRequset(true);
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
       setsuccessRequset(false);
     }
   };
