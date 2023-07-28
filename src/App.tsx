@@ -1,23 +1,26 @@
+/* eslint-disable no-shadow */
+// App.tsx
 import React, { useState } from 'react';
-import './App.scss';
-import { Header } from './components/Header/Header';
-import { InfoSection } from './components/InfoSection/InfoSection';
-import { CardCatalog } from './components/CardCatalog/CardCatalog';
-import { FormComponents } from './components/FormComponents/FormComponents';
-import { SuccessfullyRegistered } from './components/SuccessfullyRegistered/SuccessfullyRegistered';
+import { ChatMessenger } from './components/ChatMessenger/ChatMessenger';
+import { UserRole } from './types/roles';
+import { Authorization } from './components/Authorization/Authorization';
 
 export const App: React.FC = () => {
-  const [successRequset, setsuccessRequset] = useState(false);
+  const [username, setUsername] = useState('');
+  const [role, setRole] = useState<UserRole | null>(null);
 
-  setTimeout(() => setsuccessRequset(false), 3000);
+  const handleLogin = (username: string, role: UserRole) => {
+    setUsername(username);
+    setRole(role);
+  };
 
   return (
     <div>
-      <Header />
-      <InfoSection />
-      <CardCatalog />
-      <FormComponents setsuccessRequset={setsuccessRequset} />
-      {successRequset && <SuccessfullyRegistered />}
+      {role ? (
+        <ChatMessenger username={username} role={role} />
+      ) : (
+        <Authorization onLogin={handleLogin} />
+      )}
     </div>
   );
 };
