@@ -1,19 +1,30 @@
+/* eslint-disable object-shorthand */
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import './chatMessenger.scss';
 import { io } from 'socket.io-client';
 import classNames from 'classnames';
+import { UserRole } from '../../types/roles';
 
 const socket = io('http://localhost:5000');
 
-export const ChatMessenger: React.FC = () => {
-  const [username, setUsername] = useState('');
+interface Props {
+  username: string;
+  role: UserRole;
+}
+
+export const ChatMessenger: React.FC<Props> = ({ username, role }) => {
   const [messages, setMessages] = useState<{ from: string; text: string }[]>([]);
   const [messageInput, setMessageInput] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     socket.on('connect', () => {
       console.log('Connected to server');
+      socket.emit('authorize', {
+        username: username,
+        role: role,
+      });
     });
 
     socket.on('chat message', (message: { from: string; text: string }) => {
@@ -38,6 +49,25 @@ export const ChatMessenger: React.FC = () => {
       });
       setMessageInput('');
     }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    let hasError = false;
+
+    inputValue.split('').forEach((char) => {
+      if (char !== '.' && char !== '-') {
+        setError('Please enter Morse code characters only (. or -)');
+        hasError = true;
+      }
+    });
+
+    if (hasError) {
+      return;
+    }
+
+    setError(null);
+    setMessageInput(inputValue);
   };
 
   return (
@@ -66,16 +96,23 @@ export const ChatMessenger: React.FC = () => {
             id="name-input"
             placeholder="Your Name"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            readOnly
+            className="chat__footer__field"
           />
 
           <input
             type="text"
             placeholder="Type your message..."
             value={messageInput}
-            onChange={(e) => setMessageInput(e.target.value)}
+            onChange={handleInputChange}
+            className={classNames('chat__footer__field', { 'chat__footer__field--error': error })}
           />
-          <button type="button" onClick={handleSendMessage}>
+          {error && <div className="error-message">{error}</div>}
+          <button
+            type="button"
+            onClick={handleSendMessage}
+            className="chat__footer__field"
+          >
             Send
           </button>
         </div>
